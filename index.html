@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VACCINE SLOT</title>
+    <link rel="stylesheet" href="COWIN_STYLE.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@0;1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital@1&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="icon" href="cowin.jpg" type="image/jpg">
+
+
+</head>
+
+<body>
+    <div class="nav">
+        <img src="https://www.cowin.gov.in/assets/images/covid19logo.jpg" alt="">
+
+        <div class="menu">
+            <span onclick="myfunction()" id="toogle">&#9776</span>
+            <ul id="ul">
+                <li class="active">Home</li>
+                <li> <a href="api_test_2.html" target="_blank">Covid 19 Data Tools</a> </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="booking-container">
+
+        <div class="booking-section">
+
+
+            <h2>Check Your Nearest Vaccination Center And Slots Availability</h2>
+
+            <div class="search">
+                <input type="text" id="pin" placeholder="Enter Pin" autocomplete="off">
+                <button id="btn">Search</button>
+            </div>
+
+
+            <div class="date-section">
+                <h5
+                    style="text-align: center;font-family: Georgia, 'Times New Roman', Times, serif; color: #fff; font-size: 16px;">
+                    DATE - <span id="todayDate"
+                        style="text-align: center;font-family: Georgia, 'Times New Roman', Times, serif; color: #Fff; font-size: 20px;"></span>
+                </h5>
+            </div>
+
+
+        </div>
+    </div>
+ <div class="before-result">
+            <h3 id="BeforeResultText"
+                style="text-align: center; font-family: 'Poppins', sans-serif; background-color: rgba(0, 0, 0, 0.8); color: #ffC002; font-size: 22px; padding: 5px; border-radius: 5px; box-shadow: 2px 3px 4px  -1px #ffC002;">
+                Your Data will appear here</h3>
+        </div>
+    <div id="box">
+
+       
+
+
+        <div id="hidden" style="display: none;">
+            <div class="inner-box2">
+
+                <div class="inner-box">
+                    <div class="left">
+                        <h5>CHC KODERMA (JHUMRI TELAIYA)</h5>
+                        <p>Block Campus Jhumri Telaiya, Koderma, Jharkhand, 825409</p>
+                    </div>
+                    <div class="right">
+                        <h6>COVIDSHIELD</h6>
+                        <span id="free">Free</span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="dose-info">
+                    <span id="dose-info-age">18 & Above</span>
+                    <span id="dose-info-all">AVl-40</span>
+                    <span id="dose-info-dose1">1st Dose-1</span>
+                    <span id="dose-info-dose2">2nd Dose-2</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+<footer>
+ <div class="foot">
+
+   <p>Coded by <span style="color: rgb(243, 200, 9);">Vikas Kumar</span>| Follow Me |</p>
+<div class="social-icons">
+ <a href="https://www.linkedin.com/in/vikas-kumar-abb131192/"><i class="fa fa-linkedin  social-btn"></i></a> 
+<a href="https://github.com/VikasKumar077"> <i class="fa fa-github  social-btn"></i></a>
+
+ <a href="https://www.instagram.com/vkraj.07/"> <i class="fa fa-instagram  social-btn"></i></a>
+  <a href="mailto: vkmi0853@gmail.com"> <i class="fa fa-envelope  social-btn"></i></a> 
+</div>
+ </div>
+</footer>
+    
+
+    <script>
+
+
+
+        function myfunction() {
+
+            console.log("hello");
+            let ul = document.getElementById("ul");
+
+            if (ul.style.display == "block") {
+                ul.style.display = "none";
+            }
+            else {
+                ul.style.display = "block"
+            }
+
+        }
+
+
+
+
+        var pin12 = document.getElementById("pin");
+
+
+
+
+        pin12.addEventListener('focus', () => {
+
+
+            pin12.style.backgroundColor = "#282929";
+            pin12.style.color = "#ffC002";
+
+        })
+
+        pin12.addEventListener('blur', () => {
+
+            pin12.style.backgroundColor = "#fff";
+            pin12.style.color = "#000";
+
+
+
+        });
+
+
+
+
+        var date = new Date();
+        console.log(date);
+        var today = date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+        console.log(today);
+        var DataSpan = document.getElementById('todayDate');
+        DataSpan.innerHTML = today;
+        var searchbtn = document.getElementById("btn");
+
+
+        searchbtn.addEventListener('click', () => {
+            var pin = pin12.value;
+            console.log(pin);
+            if (pin == "" || pin == undefined) {
+                alert('Enter Pin Code');
+            }
+            else if (pin.length != 6) {
+                alert('Enter Correct Pin Code');
+
+            }
+
+
+            fetch("https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/findByPin?pincode=" + pin + "&date=" + today)
+
+                .then((apidata) => {
+                    return apidata.json();
+
+                }).then((actualdata) => {
+
+                    let tablefetch = document.getElementById('tableid');
+
+
+                    console.log(actualdata);
+
+                    console.log(actualdata.sessions);
+                    var allsessions = actualdata.sessions;
+
+
+                    if (actualdata) {
+
+
+                        
+                        var BeforeResultText = document.getElementById('BeforeResultText');
+
+                        if (allsessions.length == 0) {
+                            // alert('no data');
+                            // No Vaccination center is available for booking.
+                            BeforeResultText.innerText="No Vaccination center is available for booking.";
+                            BeforeResultText.style.color="red";
+                        }
+                        else{
+                            BeforeResultText.innerText="Vaccination center is available for booking.";
+                            BeforeResultText.style.color="#00d351";
+
+                        }
+
+    let box = document.getElementById("box");
+box.innerHTML="";
+                        
+                        for (var i = 0; i < allsessions.length; i++) {
+
+
+
+
+
+                            var mainBox = document.createElement('div');
+                            mainBox.classList.add('inner-box2');
+                            // console.log(mainBox);
+
+                            var innerBox = document.createElement('div');
+                            innerBox.classList.add("inner-box");
+                            // console.log(innerBox);
+                            var leftDiv = document.createElement('div');
+                            leftDiv.classList.add('left');
+
+                            var rightDiv = document.createElement('div');
+                            rightDiv.classList.add('right');
+
+
+
+                            var newH5 = document.createElement('h5');
+                            newH5.innerHTML = allsessions[i].name;
+
+                            // console.log(newH2);
+                            var newP = document.createElement('p');
+                            //  newP.innerHTML=allsessions[i].address+"allsessions[i].district_name";
+                            newP.innerHTML = allsessions[i].address + "," + " " + `${allsessions[i].district_name}` + "," + " " + `${allsessions[i].state_name}` + "," + " " + `${allsessions[i].pincode}`;
+                            console.log(newP);
+
+                            var NewRightH5 = document.createElement('h5');
+                            NewRightH5.innerHTML = allsessions[i].vaccine;
+
+                            var NewRightSPAN = document.createElement('span');
+                            NewRightSPAN.innerHTML = allsessions[i].fee_type;
+
+                            var DoseInfoDIV = document.createElement('div');
+                            DoseInfoDIV.classList.add('dose-info');
+                            // console.log(DoseInfoDIV);
+
+
+                            var SpanForAge = document.createElement('span');
+                            SpanForAge.id = "dose-info-age";
+                            SpanForAge.innerHTML = ' 18 & Above ';
+
+
+                            var SpanForAllDoses = document.createElement('span');
+                            SpanForAllDoses.id = "dose-info-all";
+                            SpanForAllDoses.innerHTML = `  All-  ${allsessions[i].available_capacity}`;
+
+                            var SpanForDose1 = document.createElement('span');
+                            SpanForDose1.id = "dose-info-dose1";
+                            SpanForDose1.innerHTML = `1st Dose- ${allsessions[i].available_capacity_dose1}`;
+
+
+                            var SpanForDose2 = document.createElement('span');
+                            SpanForDose2.id = "dose-info-dose2";
+                            SpanForDose2.innerHTML = `2nd Dose- ${allsessions[i].available_capacity_dose2}`;
+
+                            leftDiv.appendChild(newH5);
+                            leftDiv.appendChild(newP);
+                            rightDiv.appendChild(NewRightH5);
+                            rightDiv.appendChild(NewRightSPAN);
+
+
+
+
+                            DoseInfoDIV.appendChild(SpanForAge);
+                            DoseInfoDIV.appendChild(SpanForAllDoses);
+                            DoseInfoDIV.appendChild(SpanForDose1);
+                            DoseInfoDIV.appendChild(SpanForDose2);
+                            innerBox.appendChild(leftDiv);
+                            innerBox.appendChild(rightDiv);
+
+
+
+
+                            mainBox.appendChild(innerBox);
+                            mainBox.appendChild(DoseInfoDIV);
+                            box.appendChild(mainBox);
+                            console.log(box);
+
+
+
+                            // var table=document.getElementsByTagName('table')[0];
+
+                            // var newRow=table.insertRow(table.rows.length);
+
+                            // var cell1=newRow.insertCell(0);                          
+                            // var cell2=newRow.insertCell(1);
+                            // var cell3=newRow.insertCell(2);
+                            // var cell4=newRow.insertCell(3);
+                            // var cell5=newRow.insertCell(4);
+                            // var cell6=newRow.insertCell(5);
+                            // var cell7=newRow.insertCell(6);
+
+
+                            //     cell1.innerHTML=allsessions[i].name;
+
+                            //     cell2.innerHTML=allsessions[i].date;
+                            //     cell3.innerHTML=allsessions[i].vaccine;
+                            //     cell4.innerHTML="18 & Above";
+                            //     cell5.innerHTML=allsessions[i].available_capacity;
+                            //     cell6.innerHTML=allsessions[i].available_capacity_dose1;
+                            //     cell7.innerHTML=allsessions[i].available_capacity_dose2;
+
+
+                            //     let cell6value=cell6.innerHTML;
+                            //     // console.log(cell6value);
+
+                            //     cell3.style.backgroundColor="#ec9005";
+                            //     cell3.style.color="#fff"
+                            //     if (cell6value==0) {
+                            //         cell6.style.backgroundColor="red"
+                            //         cell6.style.color="#fff";
+                            //     }
+                            //     else{
+                            //         cell6.style.backgroundColor="green"
+                            //         cell6.style.color="#fff";
+
+                            //     }
+
+                            //     cell4.style.backgroundColor="#007BFF"
+                            //     cell4.style.color="#ffF"
+
+                            // console.log("hello");
+
+
+
+                        }
+                    }
+                })
+
+
+                .catch((error) => {
+                    console.log(`The ERROR: ${error}`);
+
+                });
+
+        })
+
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>
