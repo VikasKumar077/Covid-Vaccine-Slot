@@ -25,7 +25,8 @@
         <img src="https://www.cowin.gov.in/assets/images/covid19logo.jpg" alt="">
 
         <div class="menu">
-            <span onclick="myfunction()" id="toogle">&#9776</span>
+            <div class="menu-btn" onclick="myfunction()"">
+                <li  class="fa fa-bars" id="toogle"></li>
             <ul id="ul">
                 <li class="active">Home</li>
                 <li> <a href="api_test_2.html" target="_blank">Covid 19 Data Tools</a> </li>
@@ -125,7 +126,8 @@
 
 
         function myfunction() {
-
+var toogle=document.getElementById('toogle');
+toogle.classList.toggle('active2');
             console.log("hello");
             let ul = document.getElementById("ul");
 
@@ -277,7 +279,10 @@ box.innerHTML="";
                             var SpanForDose1 = document.createElement('span');
                             SpanForDose1.id = "dose-info-dose1";
                             SpanForDose1.innerHTML = `1st Dose- ${allsessions[i].available_capacity_dose1}`;
-
+                                if(allsessions[i].available_capacity<=0)
+                            {
+                                SpanForAllDoses.classList.add('active3');
+                            }
 
                             var SpanForDose2 = document.createElement('span');
                             SpanForDose2.id = "dose-info-dose2";
