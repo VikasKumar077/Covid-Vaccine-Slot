@@ -17,7 +17,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="icon" href="cowin.jpg" type="image/jpg">
 
-
 </head>
 
 <body>
@@ -25,8 +24,10 @@
         <img src="https://www.cowin.gov.in/assets/images/covid19logo.jpg" alt="">
 
         <div class="menu">
-            <div class="menu-btn" onclick="myfunction()"">
+            <!-- <span onclick="myfunction()" id="toogle">&#9776</span> -->
+             <div class="menu-btn" onclick="myfunction()"">
                 <li  class="fa fa-bars" id="toogle"></li>
+            </div>
             <ul id="ul">
                 <li class="active">Home</li>
                 <li> <a href="api_test_2.html" target="_blank">Covid 19 Data Tools</a> </li>
@@ -95,7 +96,7 @@
 
                 <div class="dose-info">
                     <span id="dose-info-age">18 & Above</span>
-                    <span id="dose-info-all">AVl-40</span>
+                    <span id="dose-info-all.active3">AVl-40</span>
                     <span id="dose-info-dose1">1st Dose-1</span>
                     <span id="dose-info-dose2">2nd Dose-2</span>
 
@@ -274,15 +275,16 @@ box.innerHTML="";
 
                             var SpanForAllDoses = document.createElement('span');
                             SpanForAllDoses.id = "dose-info-all";
-                            SpanForAllDoses.innerHTML = `  All-  ${allsessions[i].available_capacity}`;
+                            SpanForAllDoses.innerHTML = `  All -  ${allsessions[i].available_capacity}`;
+                            if(allsessions[i].available_capacity<=0)
+                            {
+                                SpanForAllDoses.classList.add('active3');
+                            }
 
                             var SpanForDose1 = document.createElement('span');
                             SpanForDose1.id = "dose-info-dose1";
                             SpanForDose1.innerHTML = `1st Dose- ${allsessions[i].available_capacity_dose1}`;
-                                if(allsessions[i].available_capacity<=0)
-                            {
-                                SpanForAllDoses.classList.add('active3');
-                            }
+
 
                             var SpanForDose2 = document.createElement('span');
                             SpanForDose2.id = "dose-info-dose2";
@@ -304,10 +306,59 @@ box.innerHTML="";
                             innerBox.appendChild(rightDiv);
 
 
+
+
                             mainBox.appendChild(innerBox);
                             mainBox.appendChild(DoseInfoDIV);
                             box.appendChild(mainBox);
                             console.log(box);
+
+
+
+                            // var table=document.getElementsByTagName('table')[0];
+
+                            // var newRow=table.insertRow(table.rows.length);
+
+                            // var cell1=newRow.insertCell(0);                          
+                            // var cell2=newRow.insertCell(1);
+                            // var cell3=newRow.insertCell(2);
+                            // var cell4=newRow.insertCell(3);
+                            // var cell5=newRow.insertCell(4);
+                            // var cell6=newRow.insertCell(5);
+                            // var cell7=newRow.insertCell(6);
+
+
+                            //     cell1.innerHTML=allsessions[i].name;
+
+                            //     cell2.innerHTML=allsessions[i].date;
+                            //     cell3.innerHTML=allsessions[i].vaccine;
+                            //     cell4.innerHTML="18 & Above";
+                            //     cell5.innerHTML=allsessions[i].available_capacity;
+                            //     cell6.innerHTML=allsessions[i].available_capacity_dose1;
+                            //     cell7.innerHTML=allsessions[i].available_capacity_dose2;
+
+
+                            //     let cell6value=cell6.innerHTML;
+                            //     // console.log(cell6value);
+
+                            //     cell3.style.backgroundColor="#ec9005";
+                            //     cell3.style.color="#fff"
+                            //     if (cell6value==0) {
+                            //         cell6.style.backgroundColor="red"
+                            //         cell6.style.color="#fff";
+                            //     }
+                            //     else{
+                            //         cell6.style.backgroundColor="green"
+                            //         cell6.style.color="#fff";
+
+                            //     }
+
+                            //     cell4.style.backgroundColor="#007BFF"
+                            //     cell4.style.color="#ffF"
+
+                            // console.log("hello");
+
+
 
                         }
                     }
